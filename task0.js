@@ -1,24 +1,10 @@
-// START of Stats.js
-javascript: (function () {
-  var script = document.createElement('script');
-  script.onload = function () {
-    var stats = new Stats();
-    document.body.appendChild(stats.dom);
-    requestAnimationFrame(function loop() {
-      stats.update(); requestAnimationFrame(loop)
-    });
-  };
-  script.src = '//mrdoob.github.io/stats.js/build/stats.min.js';
-  document.head.appendChild(script);
-})()
-// END of Stats.js
-
 //Global Setup
 var stack0 = [];
 var stack1 = [];
 var tick = 0;
 var timer = 0;
 var time = new PIXI.ticker.Ticker();
+var framerate = document.getElementById("framerate");
 //Global Setup
 
 var renderer = PIXI.autoDetectRenderer(512, 512, {
@@ -35,11 +21,13 @@ PIXI.loader
   .load(setup);
 
 function setup() {
+  this.elapsed = Date.now();
   setupStack0();
   animationLoop();
 };
 
 function animationLoop() {
+  var now = Date.now();
   if (this.tick < 144)
     requestAnimationFrame(animationLoop);
 
@@ -49,6 +37,12 @@ function animationLoop() {
     this.timer = 0;
   }
   this.timer += 1 / this.time.FPS;
+
+
+  framerate.innerHTML = (1000 / (now - elapsed)).toFixed(2);
+
+  elapsed = now;
+
 
   renderer.render(stage);
 }
