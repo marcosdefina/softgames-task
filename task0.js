@@ -18,7 +18,7 @@ var stack0 = [];
 var stack1 = [];
 var tick = 0;
 var timer = 0;
-var time = new PIXI.Ticker();
+var time = new PIXI.ticker.Ticker();
 //Global Setup
 
 var renderer = PIXI.autoDetectRenderer(512, 512, {
@@ -61,8 +61,8 @@ function setupStack0() {
     );
     stage.addChild(this.stack0[i]);
     this.stack0[i].anchor.set(-0.5, 0.5);
-    this.stack0[i].x = renderer.width / 2;
-    this.stack0[i].y = renderer.height / 2;
+    this.stack0[i].x = renderer.width / 3 - 50;
+    this.stack0[i].y = renderer.height / 3;
     this.stack0[i].y -= i - 144;
     i++;
   }
@@ -91,8 +91,8 @@ function incrementStack1() {
   );
   stage.addChild(this.stack1[this.tick]);
   this.stack1[this.tick].anchor.set(0.5, 0.5);
-  this.stack1[this.tick].x = renderer.width / 2;
-  this.stack1[this.tick].y = renderer.height / 2;
+  this.stack1[this.tick].x = renderer.width / 3 - 50;
+  this.stack1[this.tick].y = renderer.height / 3;
   this.stack1[this.tick].y += 144;
   this.stack1[this.tick].y -= this.tick;
 }
