@@ -9,7 +9,7 @@
     "node": "12.4.0"
   },
   "scripts": {
-    "start": "node ./app.js"
+    "start": "http-server"
   },
   "dependencies": {
     "express": "^4.17.1",
