@@ -14,9 +14,10 @@ javascript: (function () {
 // END of Stats.js
 
 //Global Setup
-stack0 = [];
-stack1 = [];
-tick = 0
+var stack0 = [];
+var stack1 = [];
+var tick = 0;
+var timer = 1;
 //Global Setup
 
 var renderer = PIXI.autoDetectRenderer(512, 512, {
@@ -27,6 +28,7 @@ var renderer = PIXI.autoDetectRenderer(512, 512, {
 document.getElementById('display').appendChild(renderer.view);
 
 var stage = new PIXI.Container();
+var time = new PIXI.Ticker();
 
 PIXI.loader
   .add('card', 'images/card.png')
@@ -38,16 +40,20 @@ function setup() {
 };
 
 function animationLoop() {
-  if(this.tick < 144)
+  if (this.tick < 144)
     requestAnimationFrame(animationLoop);
 
-  stackChange();
-  this.tick++;
+  if (this.timer > 1) {
+    stackChange();
+    this.tick++;
+    this.timer = 0;
+  }
+  this.timer += 1/this.time.FPS;
 
   renderer.render(stage);
 }
 
-function stackChange(){
+function stackChange() {
   //Incrementing Stack1
   this.stack1[this.tick] = new PIXI.Sprite(
     PIXI.loader.resources['card'].texture
@@ -62,18 +68,18 @@ function stackChange(){
   //Incrementing Stack1
 
   //Decrementing Stack0
-  
-  stage.removeChild(this.stack0[this.stack0.length-1])
-  if(this.stack0.length > 0)
+
+  stage.removeChild(this.stack0[this.stack0.length - 1])
+  if (this.stack0.length > 0)
     this.stack0.length -= 1;
   //Decrementing Stack0
 
   stackChangeAnimation();
 }
 
-function stackChangeAnimation(){}
+function stackChangeAnimation() { }
 
-function positioningStack(){
+function positioningStack() {
   i = 0;
   while (i < 144) {
     this.stack0[i] = new PIXI.Sprite(
