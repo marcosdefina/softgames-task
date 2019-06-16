@@ -5,6 +5,11 @@ var tick = 0;
 var timer = 0;
 var time = new PIXI.ticker.Ticker();
 var framerate = document.getElementById("framerate");
+
+var animationCounter0 = 0;
+var animationCounter1 = 0;
+var firstAnim = false;
+var secondAnim = false;
 //Global Setup
 
 var renderer = PIXI.autoDetectRenderer(512, 512, {
@@ -31,20 +36,52 @@ function animationLoop() {
   if (this.tick < 144)
     requestAnimationFrame(animationLoop);
 
-  if (this.timer > 1) {
-    decrementStack0();
+  if (this.timer > 1 || this.timer == 0) {
+    if(this.firstAnim)
+      this.secondAnim = true;
+    else this.firstAnim = true;
+
+    //decrementStack0();
     this.tick++;
     this.timer = 0;
   }
   this.timer += 1 / this.time.FPS;
 
-
+  this.animationCounter0 +=  this.timer;
+  this.animationCounter1 +=  this.timer;
+  cardMovement(this.stack0[144-this.tick], this.animationCounter0, this.tick)
+/*
+  if(this.firstAnim){
+    console.log('entered first anim')
+    
+    console.log('animCounter0: '+ this.animationCounter0)
+    if(this.animationCounter0 > 2){
+      this.animationCounter0 = 0;
+      this.firstAnim = false;
+      //incrementStack1();
+    }
+  }
+  if(this.secondAnim){
+    console.log('entered second anim')
+    cardMovement(this.stack0[this.tick-1], this.tick)
+    if(this.animationCounter1 > 2){
+      this.animationCounter1 = 0
+      this.secondAnim = false;
+      //incrementStack1();
+    }
+  }
+*/
   framerate.innerHTML = (1000 / (now - elapsed)).toFixed(2);
-
   elapsed = now;
 
-
   renderer.render(stage);
+}
+
+function cardMovement(card, counter, index){
+  deltaX = 450/(2*this.time.FPS);
+  deltaY = (index-144)/this.time.FPS;
+  card.x -= deltaX;
+  card.y -= deltaY;
 }
 
 function setupStack0() {
@@ -76,7 +113,7 @@ function stackChangeAnimation() {
   //Suposing PixiJs came to make things easier, I'm sure I'll be very productive.
   //In UnityC# I'll be moving the objects without instancianting new ones
   //But here I dont know yet how to do it, but I'll learn and will make things better.
-  incrementStack1();
+  console.log('no-way-out')
 }
 
 function incrementStack1() {
