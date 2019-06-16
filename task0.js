@@ -40,7 +40,6 @@ function animationLoop() {
     if(this.firstAnim)
       this.secondAnim = true;
     else this.firstAnim = true;
-
     //decrementStack0();
     this.tick++;
     this.timer = 0;
@@ -49,12 +48,10 @@ function animationLoop() {
 
   this.animationCounter0 +=  this.timer;
   this.animationCounter1 +=  this.timer;
-  cardMovement(this.stack0[144-this.tick], this.animationCounter0, this.tick)
-/*
+  cardMovement(this.stack0[144-this.tick], this.animationCounter0, this.tick);
+/*  
   if(this.firstAnim){
-    console.log('entered first anim')
-    
-    console.log('animCounter0: '+ this.animationCounter0)
+    setTimeout(1).then(cardMovement(this.stack0[144-this.tick], this.animationCounter0, this.tick))
     if(this.animationCounter0 > 2){
       this.animationCounter0 = 0;
       this.firstAnim = false;
@@ -62,15 +59,14 @@ function animationLoop() {
     }
   }
   if(this.secondAnim){
-    console.log('entered second anim')
-    cardMovement(this.stack0[this.tick-1], this.tick)
+    setTimeout(1).then(cardMovement(this.stack0[144-this.tick], this.animationCounter1, this.tick))
     if(this.animationCounter1 > 2){
       this.animationCounter1 = 0
       this.secondAnim = false;
       //incrementStack1();
     }
   }
-*/
+  */
   framerate.innerHTML = (1000 / (now - elapsed)).toFixed(2);
   elapsed = now;
 
