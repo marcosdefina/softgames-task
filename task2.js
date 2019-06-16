@@ -1,5 +1,12 @@
-(function(window){
+/**
+ * 
+ *	<!-- TASK2.js is a code from pixi-particles reposity named as ParticleExample.js -->
+ *  <!-- https://github.com/pixijs/pixi-particles/tree/master/docs/examples/js -->
+ *  <!-- All credits to the pixi-particles team -->
+ * 
+ */
 
+(function(window){
 	/**
 	*  Basic example setup
 	*  @class ParticleExample
