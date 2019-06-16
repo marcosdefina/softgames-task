@@ -259,6 +259,9 @@ const SYMBOL_SIZE = 150;
 
 var stage = new PIXI.Container();
 
+var timer = 0;
+var time = new PIXI.ticker.Ticker();
+
 PIXI.loader
   .load(setup);
 
@@ -274,10 +277,14 @@ function setup() {
 function animationLoop() {
   var now = Date.now();
   requestAnimationFrame(animationLoop);
-  text(wordList[Math.floor(Math.random() * wordList.length)],
-    wordList[Math.floor(Math.random() * wordList.length)],
-    wordList[Math.floor(Math.random() * wordList.length)],
-  );
+  
+  this.timer += 1 / this.time.FPS;
+  if (this.timer > 2) this.timer = 0
+  if (this.timer == 0)
+    text(wordList[Math.floor(Math.random() * wordList.length)],
+      wordList[Math.floor(Math.random() * wordList.length)],
+      wordList[Math.floor(Math.random() * wordList.length)],
+    );
   /*
    *   Write here your code
    */
